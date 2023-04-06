@@ -66,7 +66,6 @@ function displayData(request) {
 
       $(".WeatherBTN").on("click", function (event) {
         const eventID = document.querySelector("#event-id").textContent; // Get the ID of the event and get the text content from
-        const api = "aea17fc72e8224d338807cf0bfd1466f";
         fetch(`weatherAPI.php?id=${eventID}`)
           .then((response) => response.json())
           .then((data) => {
