@@ -1,0 +1,46 @@
+body{
+    background-color: #fff6ef  ;
+    font-family: 'Montserrat';
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+h1{
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 50px;
+    font-weight: 800;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin-top: 0;
+    height: 100px;
+    background: #c5937f;
+    background: linear-gradient(270deg, rgb(218, 162, 139) 0%, rgba(225,218,210,1) 79%);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    color: white;
+}
+
+.selectCommodity{
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background-color: #c5937f;
+    border-radius: 20px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    height: 40px;
+    margin-left: 25%;
+    margin-right:25%;
+    width: 50%;
+}
+
+option:hover{
+    background-color: green;
+}

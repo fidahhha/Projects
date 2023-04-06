@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Asynchronous Event Viewer</title>
+        <link href="Style.css" rel="stylesheet">
+        <script src="AJAX.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <!-- Heading Name -->
+        <h1>Upcoming Events:</h1>
+        <!-- Container to hold all elements -->
+        <div class="Container" id="Container">
+            <!-- Holding the event title -->
+            <div class="event-title" id="event-name"></div>
+            <div class="event-id" id="event-id"></div>
+            <!-- Buttons for different tasks -->
+            <button class="UpdateBTN">Update</button>
+                <button class="WeatherBTN">Weather</button>
+                <!-- Displays additional information about event -->
+            <div id="event-details"></div>
+                <div class="weather-info"></div>           
+        </div>
+    </body>
+</html>
