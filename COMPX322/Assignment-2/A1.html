@@ -6,17 +6,13 @@
         <script src="AJAX.js"></script>
 
     </head>
-    <body>
+    <!-- Sets up the drop down list for commodities -->
+    <body onload="setUpForm()">
         <h1>Commodoties Prices Widget</h1>
-        <div id="data">
-            
+        <!-- Individuals options -->
+        <select name="Select a Commodity" id="options-select"></select>
+        <div id="dashboard">
+            <div id="widget-container"></div>
         </div>
-        <!-- Drop-down list for the commodities -->
-        <form id="commoditiesForm" class="commoditiesForm"> 
-            <select id="selectCommodity" class="selectCommodity">
-              <option>Choose a Commodity</option>
-            </select>
-        </form>
-        <div id="CommodityWidget"></div>
     </body>
 </html>
