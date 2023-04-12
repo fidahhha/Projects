@@ -4,6 +4,7 @@ body{
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
+    overflow-x: hidden;
 }
 
 h1{
@@ -22,7 +23,7 @@ h1{
     color: white;
 }
 
-.selectCommodity{
+select, option{
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 1px;
@@ -36,11 +37,63 @@ h1{
     border-left-style: hidden;
     border-bottom-style: hidden;
     height: 40px;
-    margin-left: 25%;
-    margin-right:25%;
-    width: 50%;
+    margin-left: 10%;
+    margin-right:10%;
+    width: 30%;
+    float: right;
 }
 
-option:hover{
-    background-color: green;
+#dashboard{
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.6);
+    height: 400px;
+    background-color: #d4b0a5;
+    position: relative;
+    margin-top: 100px;
+    padding-top: 20px;
+}
+
+.widget{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    background-color: #78886f;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    width: 200px;
+    float: left;
+    height: 160px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+button{
+    color: black;
+    background-color: #e1f8d4;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    float: left;
+    margin-left: 20px;
+    transition: 0.5s;
+}
+
+button:hover{
+    background-color: #4d5f43;
+    color: white;
+}
+
+
+#chart-container{
+    width: 50%;
+    height: 500px;
+    margin-top: 40px;
+    margin-left: 30px;
+    border: 1px solid #0a0909;
+    border-radius: 20px;
 }

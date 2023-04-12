@@ -72,6 +72,12 @@ function buildForm(options) {
     );
     tempname = c.name;
   });
+  // Create chart container
+  const chartContainer = document.createElement("div");
+  chartContainer.classList.add("container");
+
+  // Append chart container to the page
+  document.getElementById("chart-container").appendChild(chartContainer);
 }
 
 const makeWidget = (selectedOption) => {
@@ -91,5 +97,42 @@ const makeWidget = (selectedOption) => {
   description.textContent = c.information;
   widgetContainer.appendChild(description);
 
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "Remove";
+  removeBtn.addEventListener("click", () => {
+    widgetContainer.remove();
+    const index = widgets.indexOf(selectedOption);
+    if (index > -1) {
+      widgets.splice(index, 1);
+    }
+  });
+  widgetContainer.appendChild(removeBtn);
+
+  const graphBtn = document.createElement("button");
+  graphBtn.textContent = "Graph";
+  graphBtn.addEventListener("click", () => {
+    getGraph(callback);
+    console.log("clicked");
+  });
+
+  widgetContainer.appendChild(graphBtn);
   return widgetContainer;
 };
+
+const getGraph = () => {
+  const url = "graph.php";
+  const data = { symbol: "AAPL" };
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+
+  fetch(url, options)
+    .then((response) => response.text())
+    .then(callback);
+};
+
+function callback(response) {
+  console.log(response);
+}
