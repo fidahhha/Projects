@@ -64,23 +64,26 @@ select, option{
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     width: 200px;
     float: left;
-    height: 160px;
+    height: 250px;
     color: white;
     margin-bottom: 20px;
 }
 
 button{
     color: black;
-    background-color: #e1f8d4;
-    border-radius: 20px;
+    border-radius: 10px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     border: none;
-    float: left;
-    margin-left: 20px;
+    border-top: #e1f8d4;
+    border-bottom: #e1f8d4;
+    display: block;
+    text-align: center;
+    width: 200px;
     transition: 0.5s;
+    margin-bottom: 5px;
 }
 
 button:hover{
@@ -94,6 +97,7 @@ button:hover{
     height: 500px;
     margin-top: 40px;
     margin-left: 30px;
-    border: 1px solid #0a0909;
+    padding-bottom: 20px;
+    border: 1px solid #750000;
     border-radius: 20px;
 }

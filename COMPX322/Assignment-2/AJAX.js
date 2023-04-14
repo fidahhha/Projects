@@ -80,6 +80,7 @@ function buildForm(options) {
   document.getElementById("chart-container").appendChild(chartContainer);
 }
 
+// --------------------- Creates widget for each commodity -----------------------
 const makeWidget = (selectedOption) => {
   // find the element in the commodity array
   let c = commodityList.find(
@@ -108,24 +109,63 @@ const makeWidget = (selectedOption) => {
   });
   widgetContainer.appendChild(removeBtn);
 
+  // ----------- Add Graph Button -------------------
   const graphBtn = document.createElement("button");
   graphBtn.textContent = "Graph";
   graphBtn.addEventListener("click", () => {
-    getGraph(callback);
-    console.log("clicked");
+    console.log("Clicked commodity:", c.name);
+    getApi(c.name, (response) => {
+      try {
+        console.log(response);
+        const data = JSON.parse(response);
+        console.log(data);
+        const chartData = data.data;
+
+        const chartConfig = {
+          type: "line",
+          data: {
+            labels: chartData.map((item) => item.date),
+            datasets: [
+              {
+                label: c.name,
+                data: chartData.map((item) => item.value),
+                borderColor: getRandomColor(),
+                fill: false,
+              },
+            ],
+          },
+        };
+
+        const chartContainer = document.getElementById("chart-container");
+        let canvas = chartContainer.querySelector("canvas");
+        if (canvas) {
+          canvas.remove();
+        }
+        canvas = document.createElement("canvas");
+        chartContainer.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+        const myChart = new Chart(ctx, chartConfig);
+      } catch (error) {
+        console.error(error);
+      }
+    });
   });
 
   widgetContainer.appendChild(graphBtn);
+
+  // ------------------- add compartive graph button -----------------------
+  const compareGraphBtn = document.createElement("button");
+  compareGraphBtn.textContent = "Add to Graph";
+  widgetContainer.appendChild(compareGraphBtn);
   return widgetContainer;
 };
 
-const getGraph = () => {
-  const url = "graph.php";
-  const data = { symbol: "AAPL" };
+// -------------------- fetch request to AlphaVantage API -------------------------
+const getApi = (COM, callback) => {
+  const url = "graph.php?Commodities=" + encodeURIComponent(COM);
   const options = {
-    method: "POST",
+    method: "GET",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
   };
 
   fetch(url, options)
@@ -135,4 +175,25 @@ const getGraph = () => {
 
 function callback(response) {
   console.log(response);
+}
+
+// Generates random colors for the graph
+function getRandomColor() {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  const rgb = `rgb(${red}, ${green}, ${blue})`;
+  return rgbToHex(rgb);
+}
+
+function rgbToHex(rgb) {
+  const matches = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  const hex = matches
+    ? "#" +
+      matches
+        .slice(1)
+        .map((component) => parseInt(component).toString(16).padStart(2, "0"))
+        .join("")
+    : rgb;
+  return hex;
 }
