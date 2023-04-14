@@ -86,6 +86,7 @@ const makeWidget = (selectedOption) => {
   let c = commodityList.find(
     (commodity) => commodity.id === parseInt(selectedOption)
   );
+  // Create elements that sit inside the widget
   const widgetContainer = document.createElement("div");
   widgetContainer.classList.add("widget");
 
@@ -98,6 +99,7 @@ const makeWidget = (selectedOption) => {
   description.textContent = c.information;
   widgetContainer.appendChild(description);
 
+  // create event listener for the remove button
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "Remove";
   removeBtn.addEventListener("click", () => {
@@ -109,7 +111,7 @@ const makeWidget = (selectedOption) => {
   });
   widgetContainer.appendChild(removeBtn);
 
-  // ----------- Add Graph Button -------------------
+  // Create event listenr for graph button
   const graphBtn = document.createElement("button");
   graphBtn.textContent = "Graph";
   graphBtn.addEventListener("click", () => {
@@ -121,6 +123,7 @@ const makeWidget = (selectedOption) => {
         console.log(data);
         const chartData = data.data;
 
+        // Define the type of chart, data and labels to be displayed on chart
         const chartConfig = {
           type: "line",
           data: {
@@ -136,6 +139,7 @@ const makeWidget = (selectedOption) => {
           },
         };
 
+        // replace chart if another commodity wants to add graph
         const chartContainer = document.getElementById("chart-container");
         let canvas = chartContainer.querySelector("canvas");
         if (canvas) {
@@ -152,18 +156,30 @@ const makeWidget = (selectedOption) => {
   });
 
   widgetContainer.appendChild(graphBtn);
+  // Create event listener for clear button
+  clearBtn.addEventListener("click", function () {
+    const chartContainer = document.getElementById("chart-container");
+    const chartCanvas = chartContainer.querySelector("canvas");
+    // IF a graph/graphs exist then clear the canvas
+    if (chartCanvas) {
+      chartContainer.removeChild(chartCanvas);
+    }
+  });
 
-  // ------------------- add compartive graph button -----------------------
+  // Declaring add to graph button
   const compareGraphBtn = document.createElement("button");
   compareGraphBtn.textContent = "Add to Graph";
   widgetContainer.appendChild(compareGraphBtn);
 
+  // Creating click event for compare button
   compareGraphBtn.addEventListener("click", () => {
-    console.log("Clicked Add to Graph button");
+    console.log("Comparing with: " + c.name);
 
+    // fetching data for the commodity clicked
     getApi(c.name, (response) => {
       try {
         console.log(response);
+        // Defining variable for the second commodity
         const secondData = JSON.parse(response).data;
 
         // Get the existing chart instance
@@ -208,7 +224,7 @@ function callback(response) {
   console.log(response);
 }
 
-// Generates random colors for the graph
+// Generates random colors for the graph each time it is clicked
 function getRandomColor() {
   const red = Math.floor(Math.random() * 256);
   const green = Math.floor(Math.random() * 256);

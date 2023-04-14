@@ -101,3 +101,27 @@ button:hover{
     border: 1px solid #750000;
     border-radius: 20px;
 }
+
+#clearBtn{
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-top: 40px;
+    background-color: #c5937f;
+    border-radius: 20px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    height: 40px;
+    margin-left: 30px;
+    width: 10%;
+    float: left;
+}
+
+#clearBtn:hover{
+    background-color: #78886f;
+}
