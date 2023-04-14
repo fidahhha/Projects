@@ -157,6 +157,37 @@ const makeWidget = (selectedOption) => {
   const compareGraphBtn = document.createElement("button");
   compareGraphBtn.textContent = "Add to Graph";
   widgetContainer.appendChild(compareGraphBtn);
+
+  compareGraphBtn.addEventListener("click", () => {
+    console.log("Clicked Add to Graph button");
+
+    getApi(c.name, (response) => {
+      try {
+        console.log(response);
+        const secondData = JSON.parse(response).data;
+
+        // Get the existing chart instance
+        const chartContainer = document.getElementById("chart-container");
+        const canvas = chartContainer.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+        const chart = Chart.instances[0];
+
+        // Add the new dataset to the existing chart
+        chart.data.datasets.push({
+          label: c.name,
+          data: secondData.map((item) => item.value),
+          borderColor: getRandomColor(),
+          fill: false,
+        });
+
+        // Update the chart
+        chart.update();
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  });
+
   return widgetContainer;
 };
 
