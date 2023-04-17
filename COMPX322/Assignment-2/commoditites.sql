@@ -36,7 +36,7 @@ INSERT INTO `commodities` (`id`, `name`, `information`, `code`) VALUES
 (2, 'Cotton', 'Global price of Cotton', 'COTTON'),
 (3, 'Sugar', 'Global price of Sugar, No. 11, World,', 'SUGAR'),
 (4, 'Copper', 'Global price of Copper', 'COPPER'),
-(5, 'Aluminium', 'Global price of Aluminum', 'ALUMINUM'),
+(5, 'Aluminum', 'Global price of Aluminum', 'ALUMINUM'),
 (6, 'Wheat', 'Global price of Wheat', 'WHEAT'),
 (7, 'Coffee', 'Global price of Coffee, Other Mild Arabica', 'COFFEE');
 

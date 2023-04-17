@@ -116,7 +116,7 @@ const makeWidget = (selectedOption) => {
   graphBtn.textContent = "Graph";
   graphBtn.addEventListener("click", () => {
     console.log("Clicked commodity:", c.name);
-    getApi(c.name, (response) => {
+    getApi(c.code, (response) => {
       try {
         console.log(response);
         const data = JSON.parse(response);
@@ -176,7 +176,7 @@ const makeWidget = (selectedOption) => {
     console.log("Comparing with: " + c.name);
 
     // fetching data for the commodity clicked
-    getApi(c.name, (response) => {
+    getApi(c.code, (response) => {
       try {
         console.log(response);
         // Defining variable for the second commodity

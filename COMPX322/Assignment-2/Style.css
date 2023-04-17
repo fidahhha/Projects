@@ -3,6 +3,7 @@ body{
     font-family: 'Montserrat';
     margin-top: 0;
     margin-left: 0;
+    margin-bottom: 0;
     margin-right: 0;
     overflow-x: hidden;
 }
@@ -45,11 +46,12 @@ select, option{
 
 #dashboard{
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.6);
-    height: 400px;
+    height: 800px;
     background-color: #d4b0a5;
     position: relative;
     margin-top: 100px;
     padding-top: 20px;
+    margin-bottom: -100px;
 }
 
 .widget{
@@ -69,6 +71,7 @@ select, option{
     margin-bottom: 20px;
 }
 
+/* Styling the colors for each button on the page */
 button{
     color: black;
     border-radius: 10px;
@@ -102,6 +105,7 @@ button:hover{
     border-radius: 20px;
 }
 
+/* Different styling for the clear button */
 #clearBtn{
     text-transform: uppercase;
     text-align: center;

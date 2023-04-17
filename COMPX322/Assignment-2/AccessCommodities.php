@@ -12,5 +12,6 @@
         }
     }
 
+    // Convert data to JSON
     echo json_encode($data);
 ?>
