@@ -1,77 +1,79 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class hexConverter {
 
     /**
-     * Main method to read input from a text file and convert to hexadecimal
-     * representation.
-     *
-     * @param args command line arguments
+     * Constructor
+     * 
+     * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        File inputFile = new File("example.txt");
-        StringBuilder input = new StringBuilder();
-
-        // Read input from text file
-        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                input.append(line);
-                input.append(System.lineSeparator()); // Add new line character
-            }
+        // Read the contents of the file as a byte array
+        File file = new File("example.txt");
+        byte[] byteArray = new byte[(int) file.length()];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            fis.read(byteArray);
         }
 
-        System.out.println("Original text: " + "\n" + input.toString());
-        byte[] bytes = input.toString().getBytes();
+        // Convert the byte array to a hex string and print it
+        String hexString = bytesToHex(byteArray);
+        System.out.println("Hex string: " + hexString);
 
-        // Compress input using LZ78 algorithm
-        List<int[]> compressed = LZencode.compressLZ78(byteToHex(bytes));
-        System.out.println("Compressed Output: " + "\n" + Arrays.deepToString(compressed.toArray()));
+        // Decode the hex string to a byte array and convert it back to text
+        byte[] decodedArray = hexToBytes(hexString.replaceAll("\\s", ""));
+        String decodedText = new String(decodedArray, StandardCharsets.UTF_8);
+        System.out.println("Decoded text: " + decodedText);
 
-        // Write compressed output to file
-        try (PrintWriter pw = new PrintWriter(new File("output.txt"))) {
-            pw.println(Arrays.deepToString(compressed.toArray()));
+        // Encode the byte array using LZ78 and print out the integer pairs
+        // Encode the byte array using LZ78 and print out the integer pairs
+        List<int[]> pairs = LZencode.Encoder(decodedArray);
+        System.out.println("Integer pairs:");
+        for (int[] pair : pairs) {
+            System.out.println(pair[0] + " " + pair[1]);
         }
 
-        String decoded = LZdecode.decode(compressed);
-        System.out.println("Decoded text: " + "\n" + decoded);
+        // Decode the integer pairs to text
+        String decodedText2 = LZdecode.decode(pairs);
+        System.out.println("Decoded text: " + decodedText2);
     }
 
     /**
-     * byteToHex(byte[] bytes)
-     *
-     * @param bytes the byte array to convert
-     * @return the hexadecimal string
+     * bytesToHex
+     * Converts bytes to hexadecimal
+     * 
+     * @param bytes
+     * @return
      */
-    public static String byteToHex(byte[] bytes) {
-        StringBuilder hexOutput = new StringBuilder();
+    public static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
-            hexOutput.append(String.format("%02X", b));
+            sb.append(String.format("%02x", b)); // Remove the space character after %02x
         }
-
-        return hexOutput.toString();
+        return sb.toString();
     }
 
     /**
-     * hexToByte(String hex)
-     *
-     * @param hex the hexadecimal string to convert
-     * @return the byte array
+     * hexToBytes
+     * Converting hexadecimal back to byte array
+     * 
+     * @param hexString
+     * @return
      */
-    public static byte[] hexToByte(String hex) {
-        byte[] bytes = new byte[hex.length() / 2];
-        for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+    public static byte[] hexToBytes(String hexString) {
+        // Check the length of the input
+        int len = hexString.length();
+        // Store converted bytes into array
+        byte[] data = new byte[len / 2];
+        // iterate over the characters, and convert it to the byte array
+        for (int i = 0; i < len; i += 2) {
+            // convert pair of hexadecimal characters
+            data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4)
+                    + Character.digit(hexString.charAt(i + 1), 16));
         }
-        return bytes;
+        return data;
     }
+
 }

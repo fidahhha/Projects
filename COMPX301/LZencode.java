@@ -6,46 +6,49 @@ public class LZencode {
      * lz78Compress
      * Compresses a byte array using the LZ78 algorithm and returns a list of
      * integer pairs representing the compressed data.
-     *
-     * @param hexInput
+     * 
+     * @param bytes
      * @return
      */
-    public static List<int[]> compressLZ78(String hexInput) {
-        // Convert the hexadecimal string input to a byte array
-        byte[] bytes = hexConverter.hexToByte(hexInput);
-
-        // Compress the byte array using the LZ78 algorithm
+    public static List<int[]> Encoder(byte[] bytes) {
+        // Initialize Dictionary
         Map<String, Integer> dictionary = new HashMap<>();
-        String phrase = "";
-        List<int[]> integerPairs = new ArrayList<>();
 
+        // Initialize variables
+        List<int[]> result = new ArrayList<>();
+        byte[] currentHex = new byte[2];
+        int counter = 1;
+
+        // Loop over bytes in the array
         for (byte b : bytes) {
-            String s = Character.toString((char) b);
-            if (dictionary.containsKey(phrase + s)) {
-                phrase += s;
+            // Check if currentHex exists in the dictionary
+            String currentString = bytesToHex(currentHex) + bytesToHex(new byte[] { b });
+            if (dictionary.containsKey(currentString)) {
+                // CurrentHex exists, so update it
+                System.arraycopy(currentString.getBytes(), 0, currentHex, 0, 2);
             } else {
-                // Print byte-to-hex conversion of the current byte being compressed
-                String hexString = hexConverter.byteToHex(new byte[] { b });
-                System.out.println("Compressing byte " + b + " (" + hexString + ")");
-                Integer index = dictionary.get(phrase);
-                if (index == null) {
-                    index = 0; // or some other default value
-                }
-                integerPairs.add(new int[] { index, b & 0xFF });
-                dictionary.put(phrase + s, dictionary.size() + 1);
-                phrase = s;
+                // CurrentHex doesn't exist, so add it to the dictionary
+                int[] pair = { dictionary.getOrDefault(bytesToHex(currentHex), 0), b & 0xFF };
+                result.add(pair);
+                dictionary.put(currentString, counter++);
+                // Update currentHex to the currentChar
+                System.arraycopy(new byte[] { b }, 0, currentHex, 0, 1);
             }
         }
 
-        if (!phrase.equals("")) {
-            Integer index = dictionary.get(phrase);
-            if (index == null) {
-                index = 0; // or some other default value
-            }
-            integerPairs.add(new int[] { index, -1 });
-        }
+        // Add remaining bytes to result
+        int[] pair = { dictionary.getOrDefault(bytesToHex(currentHex), 0), -1 };
+        result.add(pair);
 
-        return integerPairs;
+        return result;
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
 
 }

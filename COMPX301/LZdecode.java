@@ -5,7 +5,7 @@ public class LZdecode {
     /**
      * Decoder
      * Converts integer pairs back to the decoded text
-     *
+     * 
      * @param pairs
      * @return
      */
@@ -18,47 +18,44 @@ public class LZdecode {
 
         // Initialize variables
         StringBuilder output = new StringBuilder();
-        String phrase = "";
-        int dictionarySize = 256;
+        int index = 0;
+        String current = "";
 
         // Loop over integer pairs
         for (int[] pair : pairs) {
             int key = pair[0];
             int value = pair[1];
+            String next;
+
+            // Check if the key exists in the dictionary
+            if (dictionary.containsKey(key)) {
+                current = dictionary.get(key);
+            } else if (key == dictionary.size()) {
+                current = current + current.charAt(0);
+            } else {
+                throw new IllegalArgumentException("Invalid key in input");
+            }
 
             // Check if the value is -1
             if (value == -1) {
                 break;
             }
 
-            String entry;
-            if (dictionary.containsKey(key)) {
-                entry = dictionary.get(key);
+            // Check if the value exists in the dictionary
+            if (dictionary.containsKey(value)) {
+                next = dictionary.get(value);
+            } else if (value == dictionary.size()) {
+                next = current + current.charAt(0);
             } else {
-                if (key == dictionarySize) {
-                    entry = phrase + phrase.charAt(0);
-                } else {
-                    throw new IllegalArgumentException("Invalid key in input");
-                }
+                throw new IllegalArgumentException("Invalid value in input");
             }
 
-            if (value < 0) {
-                value += 256;
-            }
-
-            String newPhrase = entry + (char) value;
-
-            // Add new phrase to the dictionary
-            dictionary.put(dictionarySize++, newPhrase);
-
-            // Append the new phrase to the output string
-            output.append(newPhrase);
-
-            // Update the current phrase
-            phrase = entry;
+            // Append the next string to the output and add it to the dictionary
+            output.append(next);
+            dictionary.put(dictionary.size(), current + next.charAt(0));
+            current = next;
         }
 
         return output.toString();
     }
-
 }
