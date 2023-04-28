@@ -11,33 +11,32 @@ public class hexConverter {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        // Read the contents of the file as a byte array
-        File file = new File("example.txt");
-        byte[] byteArray = new byte[(int) file.length()];
-        try (FileInputStream fis = new FileInputStream(file)) {
-            fis.read(byteArray);
+        File inputFile = new File("example.txt");
+        StringBuilder input = new StringBuilder();
+
+        // Read input from text file
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                input.append(line);
+                input.append(System.lineSeparator()); // Add new line character
+            }
         }
 
-        // Convert the byte array to a hex string and print it
-        String hexString = bytesToHex(byteArray);
-        System.out.println("Hex string: " + hexString);
+        System.out.println("Original text: " + "\n" + input.toString());
+        byte[] bytes = input.toString().getBytes();
 
-        // Decode the hex string to a byte array and convert it back to text
-        byte[] decodedArray = hexToBytes(hexString.replaceAll("\\s", ""));
-        String decodedText = new String(decodedArray, StandardCharsets.UTF_8);
-        System.out.println("Decoded text: " + decodedText);
+        // Compress input using LZ78 algorithm
+        List<int[]> compressed = LZencode.Encoder(bytes);
+        System.out.println("Compressed Output: " + "\n" + Arrays.deepToString(compressed.toArray()));
 
-        // Encode the byte array using LZ78 and print out the integer pairs
-        // Encode the byte array using LZ78 and print out the integer pairs
-        List<int[]> pairs = LZencode.Encoder(decodedArray);
-        System.out.println("Integer pairs:");
-        for (int[] pair : pairs) {
-            System.out.println(pair[0] + " " + pair[1]);
+        // Write compressed output to file
+        try (PrintWriter pw = new PrintWriter(new File("output.txt"))) {
+            pw.println(Arrays.deepToString(compressed.toArray()));
         }
 
-        // Decode the integer pairs to text
-        String decodedText2 = LZdecode.decode(pairs);
-        System.out.println("Decoded text: " + decodedText2);
+        String decoded = LZdecode.decode(compressed);
+        System.out.println("Decoded text: " + "\n" + decoded);
     }
 
     /**
