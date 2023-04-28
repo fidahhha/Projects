@@ -6,47 +6,46 @@ public class LZencode {
      * lz78Compress
      * Compresses a byte array using the LZ78 algorithm and returns a list of
      * integer pairs representing the compressed data.
-     * 
-     * @param bytes
+     *
+     * @param hexInput
      * @return
      */
-    public static List<int[]> LZEncode(byte[] bytes) {
-        // Initialize Dictionary
+    public static List<int[]> compressLZ78(String hexInput) {
+        // Convert the hexadecimal string input to a byte array
+        byte[] bytes = hexConverter.hexToByte(hexInput);
+
+        // Compress the byte array using the LZ78 algorithm
         Map<String, Integer> dictionary = new HashMap<>();
+        String phrase = "";
+        List<int[]> integerPairs = new ArrayList<>();
 
-        // Initialize variables
-        List<int[]> result = new ArrayList<>();
-        StringBuilder currentHex = new StringBuilder();
-        int counter = 1;
-
-        // Loop over bytes in the array
         for (byte b : bytes) {
-            // Format value
-            String currentChar = String.format("%02x", b);
-            String currentString = currentHex.toString() + currentChar;
-
-            // Check if currentHex exists in the array
-            if (dictionary.containsKey(currentString)) {
-                currentHex = new StringBuilder(currentString);
+            String s = Character.toString((char) b);
+            if (dictionary.containsKey(phrase + s)) {
+                phrase += s;
             } else {
-                // IF it doesnt exist then add it to the dictionary
-                int[] pair = { dictionary.getOrDefault(currentHex.toString(), 0), b & 0xFF };
-                result.add(pair);
-                dictionary.put(currentString, counter);
-                currentHex = new StringBuilder(currentChar);
-                // Increment the counter
-                counter++;
+                // Print byte-to-hex conversion of the current byte being compressed
+                String hexString = hexConverter.byteToHex(new byte[] { b });
+                System.out.println("Compressing byte " + b + " (" + hexString + ")");
+                Integer index = dictionary.get(phrase);
+                if (index == null) {
+                    index = 0; // or some other default value
+                }
+                integerPairs.add(new int[] { index, b & 0xFF });
+                dictionary.put(phrase + s, dictionary.size() + 1);
+                phrase = s;
             }
         }
 
-        // Check if there are any valuse left in the currentHex
-        if (currentHex.length() > 0) {
-            // IF value does exist then add it to the output/result
-            // -1 indicates there are no values left to be encoded
-            int[] pair = { dictionary.getOrDefault(currentHex.toString(), 0), -1 };
-            result.add(pair);
+        if (!phrase.equals("")) {
+            Integer index = dictionary.get(phrase);
+            if (index == null) {
+                index = 0; // or some other default value
+            }
+            integerPairs.add(new int[] { index, -1 });
         }
 
-        return result;
+        return integerPairs;
     }
+
 }
