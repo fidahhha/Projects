@@ -1,0 +1,91 @@
+body, html{
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Banner/Hero Image Styling */
+.Hero-Image {
+    background-image: url("Images/Hero.jpg"); 
+    min-height: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Hero-Image::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    min-height: 380px;
+    background: rgba(0, 0, 0, 0.5); /* Change opacity value to adjust tint level */
+    z-index: 1;
+}
+  
+/* Navigation Bar Styling */
+.Top-Navigation {
+    overflow: hidden;
+}
+
+  
+  /* Navbar links */
+.Top-Navigation a {
+    float: left;
+    position: relative;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    z-index: 1;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+  
+.Top-Navigation a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #E55E45;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+  
+.Top-Navigation a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Home Body Styling */
+.Container{
+    margin-top: 20%;
+}
+.Home-Title{
+    font-weight: 700;
+    text-align: center;
+    padding-top: 150px;
+}
+
+/* Footer Styling */
+.Footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background-color: #134D58;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+}
