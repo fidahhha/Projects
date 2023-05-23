@@ -1,0 +1,87 @@
+body{
+  background-color: #e0e1dd;
+  font-family: 'Inter', sans-serif;
+}
+
+.App-Header{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: 40px;
+}
+
+
+
+.Project-Details {
+  display: flex;
+  flex-direction: row;
+  /* background-color: #73005b; */
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+  
+}
+.Project-List{
+  background-color: #d8007c;
+  padding: 40px;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.Project-Column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 650px;
+}
+.Project-ID{
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.Project-1 {
+  background-color:rgba(249, 62, 99, 0.671); /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+
+.Project-2{
+  background-color: #ff7053b7; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+.Project-3{
+  background-color: #e9913eab; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+.Project-4{
+  background-color: #e0b340c2; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+.Project-5{
+  background-color: #ddc454c2; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+
+.Delete-Button{
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  /* margin-left: -900px; */
+}
+
+.Delete-Button:hover{
+  transform: scale(1.1); /* Increase the scale of the button */
+  transition: transform 0.3s ease; /* Add a smooth transition */
+}
