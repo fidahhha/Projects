@@ -1,0 +1,241 @@
+body{
+  background-color: #e0e1dd;
+  font-family: 'Inter', sans-serif;
+}
+
+.App-Header{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: 40px;
+}
+
+
+
+.Project-Details {
+  display: flex;
+  flex-direction: row;
+  /* background-color: #73005b; */
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+  z-index: 1;
+  
+}
+.Project-List{
+  background-color: #d6d6d6;
+  padding: 40px;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.Project-Column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 650px;
+}
+.Project-ID{
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.Project-1 {
+  background-color:#fdb080; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+
+.Project-2{
+  background-color: #f78e82; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+.Project-3{
+  background-color: #d885a2; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+.Project-4{
+  background-color: #df9185; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+.Project-5{
+  background-color: #b2acd6; /* Specify your desired color */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+
+.Project{
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+}
+
+.Delete-Button{
+  background-color: rgba(0, 0, 0, 0.753);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.5s ease;
+}
+
+.Delete-Button:hover{
+  transform: scale(1.2); /* Increase the scale of the button */
+  transition: transform 0.5s ease; /* Add a smooth transition */
+}
+
+.Create_Project{
+  background-color: #cac6e1;
+  color: rgb(80, 29, 100);
+  border: none;
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.5s ease;
+}
+
+.Create_Project:hover{
+  transform: scale(1.02); /* Increase the scale of the button */
+  transition: transform 0.5s ease; /* Add a smooth transition */
+}
+
+.Form {
+  background-color: rgba(211, 211, 211, 0.856);
+  padding: 20px;
+  text-align: center;
+  height: 450px;
+  width: 400px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Project-Header{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: 25px;
+}
+
+
+.Form input, .Date {
+  margin-bottom: 20px;
+  display: block;
+  width: 380px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+}
+
+.submitBtn{
+  background-color: #fdb080;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+  transition: transform 0.5s ease;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.cancelBtn{
+  background-color: #d885a2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+  transition: transform 0.5s ease;
+  margin-left: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.submitBtn:hover, .cancelBtn:hover {
+  transform: scale(1.2); /* Increase the scale of the button */
+  transition: transform 0.5s ease; /* Add a smooth transition */
+}
+
+/* Styling sort */
+.sort-option{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 15px;
+  margin-left: 20px;
+  padding: 20px;
+}
+
+#sort-order, #sort-option{
+  border: none;
+  background-color: #d885a2;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  font-weight: 700;
+  color: #a02d55;
+  letter-spacing: 1px;
+}
+#sort-order:hover, #sort-option:hover{
+  background-color: #df9185;
+}
+.sortBtn{
+  border: none;
+  background-color: #d885a2;
+  color: #a02d55;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: transform 0.5s ease; /* Add a smooth transition */
+}
+
+.sortBtn:hover{
+  transform: scale(1.1); /* Increase the scale of the button */
+  transition: transform 0.5s ease; /* Add a smooth transition */
+  background-color: #df9185;
+}
+
+.sort-section{
+  background-color: #d6d6d6;
+  margin: 20px;
+  padding: 20px;
+  width: 50%;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
